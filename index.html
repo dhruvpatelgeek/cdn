@@ -10,10 +10,16 @@
 <html>
     <head>
     <body>
-        <link rel="stylesheet" media="screen and (max-aspect-ratio: 1572/1344)" href="css/index/index_mobile.css"> 
-        <link rel="stylesheet" media="screen and (min-aspect-ratio: 1572/1344) and (max-aspect-ratio: 18/10)" href="css/index/index_wide.css">
-        <link rel="stylesheet" media="screen and (min-aspect-ratio: 18/10)" href="css/index/index.css">
         
+    <!-- Mobile Stylesheet (aspect ratio up to 4:3) -->
+    <link rel="stylesheet" media="screen and (max-aspect-ratio: 4/3)" href="css/index/index_mobile.css">
+    
+    <!-- Tablet Stylesheet (aspect ratio between 4:3 and 16:9) -->
+    <link rel="stylesheet" media="screen and (min-aspect-ratio: 4/3) and (max-aspect-ratio: 16/9)" href="css/index/index.css">
+    
+    <!-- Wide Screen Stylesheet (aspect ratio 16:9 and above) -->
+    <link rel="stylesheet" media="screen and (min-aspect-ratio: 16/9)" href="css/index/index_wide.css">
+ 
         <link href="https://fonts.googleapis.com/css?family=Lato:300&display=swap" rel="stylesheet">
         <div class="grid-page">
 
