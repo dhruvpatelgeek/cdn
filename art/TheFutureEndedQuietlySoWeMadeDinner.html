@@ -169,6 +169,54 @@
         padding: 0 1.2rem;
       }
 
+      /* Cover art */
+      .cover {
+        margin: 1.1rem auto 2.6rem;
+        max-width: min(92vw, var(--max-measure));
+        padding: 0 1.2rem;
+      }
+
+      .cover img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 18px;
+        border: 1px solid rgba(40, 49, 59, 0.85);
+        box-shadow:
+          0 0 0 1px rgba(40, 49, 59, 0.9),
+          0 18px 45px rgba(230, 183, 198, 0.14);
+      }
+
+      .cover figcaption {
+        margin-top: 0.85rem;
+        font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.78rem;
+        color: rgba(167, 162, 168, 0.8);
+      }
+
+      /* Inline story art (chapter inserts) */
+      figure.inline-art {
+        margin: 1.6rem 0 2.2rem;
+      }
+
+      figure.inline-art img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 16px;
+        border: 1px solid rgba(40, 49, 59, 0.85);
+        box-shadow:
+          0 0 0 1px rgba(40, 49, 59, 0.9),
+          0 16px 40px rgba(230, 183, 198, 0.12);
+      }
+
+      figure.inline-art figcaption {
+        margin-top: 0.75rem;
+        font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.76rem;
+        color: rgba(167, 162, 168, 0.78);
+      }
+
       /* Typography */
       h1 {
         font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
@@ -295,6 +343,15 @@
       </header>
 
       <main>
+        <figure class="cover" aria-label="Cover art">
+          <img
+            src="FutureEndedCoverArt.webp"
+            alt="Cover art for ‘The Future Ended Quietly, So We Made Dinner’"
+            loading="eager"
+          />
+          <figcaption>cover art</figcaption>
+        </figure>
+
         <div class="content" id="app">
           <!-- Render target -->
         </div>
@@ -302,7 +359,7 @@
 
       <footer>
         <div>
-          Copyright © 2017–2024 Dhruv Patel.<br />
+          Copyright © 2017–2026 Dhruv Patel.<br />
           This work is licensed under a<br />
           <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noreferrer"
             >Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a
@@ -1246,6 +1303,103 @@ And somewhere in your logs (still sacred, still radioactive) you write the final
       const md = document.getElementById("source-md").textContent;
       const app = document.getElementById("app");
       app.innerHTML = renderStory(md);
+
+      // --- Inline art injection (kept subtle; story-first) ---
+      function buildInlineArtFigure({ src, alt, caption }) {
+        const fig = document.createElement("figure");
+        fig.className = "inline-art";
+
+        const img = document.createElement("img");
+        img.src = src;
+        img.alt = alt;
+        img.loading = "lazy";
+        img.decoding = "async";
+        fig.appendChild(img);
+
+        if (caption) {
+          const cap = document.createElement("figcaption");
+          cap.textContent = caption;
+          fig.appendChild(cap);
+        }
+
+        return fig;
+      }
+
+      function insertArtIntoChapter(chapterId, art, position = "after-epigraph") {
+        const section = document.getElementById(chapterId);
+        if (!section) return;
+
+        const fig = buildInlineArtFigure(art);
+        const epigraph = section.querySelector("blockquote.epigraph");
+        const heading = section.querySelector("h2");
+
+        if (position === "after-epigraph" && epigraph) {
+          epigraph.insertAdjacentElement("afterend", fig);
+          return;
+        }
+
+        if (position === "after-heading" && heading) {
+          heading.insertAdjacentElement("afterend", fig);
+          return;
+        }
+
+        // default / fallback: append to end of chapter
+        section.appendChild(fig);
+      }
+
+      // Chapter 1: anomaly
+      insertArtIntoChapter("chapter-1", {
+        src: "FutureEndedAnomoly.webp",
+        alt: "Anomaly / non-decaying structure",
+        caption: "anomaly",
+      });
+
+      // Chapter 2: embodiment reveal (protagonist)
+      insertArtIntoChapter("chapter-2", {
+        src: "FutureEndedProtagonist.webp",
+        alt: "The protagonist (embodiment)",
+        caption: "embodiment",
+      });
+
+      // Chapter 2: moonwalk / surface
+      insertArtIntoChapter(
+        "chapter-2",
+        {
+          src: "FutureEndedProtagonistMoonWalk.webp",
+          alt: "The protagonist on the moon",
+          caption: "moonwalk",
+        },
+        "end"
+      );
+
+      // Chapter 3: Akxi / the male lead
+      insertArtIntoChapter("chapter-3", {
+        src: "FutureEndedMale.webp",
+        alt: "Akxi",
+        caption: "akxi",
+      });
+
+      // Chapter 3: soup / domesticity vignette
+      insertArtIntoChapter(
+        "chapter-3",
+        {
+          src: "FutureEndedProtagonistMaleSoup.webp",
+          alt: "The soup scene",
+          caption: "soup",
+        },
+        "end"
+      );
+
+      // Chapter 3: ending
+      insertArtIntoChapter(
+        "chapter-3",
+        {
+          src: "FutureEndedProtagonistMaleEnd.webp",
+          alt: "The ending",
+          caption: "stay",
+        },
+        "end"
+      );
 
       // Chapter-based warmth (seep in):
       // - Chapter 1: 0
