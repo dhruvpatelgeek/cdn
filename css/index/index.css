@@ -56,6 +56,57 @@ button{
 	   color: white;
 	   cursor:pointer;
 	}
+
+/* Dropdown for menu-3 (art) */
+.menu-3.dropdown{
+	position: relative;
+}
+
+.menu-3.dropdown .dropdown-toggle{
+	/* keep existing button styling; just make sure it sits above menu */
+	position: relative;
+	z-index: 10001;
+}
+
+.menu-3.dropdown .dropdown-menu{
+	display: none;
+	position: absolute;
+	top: 60px; /* matches existing button height */
+	right: 0;
+	z-index: 10000;
+
+	min-width: 520px;
+	background: #ffffff;
+	border: 1px solid rgba(0,0,0,0.15);
+	box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+}
+
+.menu-3.dropdown:hover .dropdown-menu,
+.menu-3.dropdown:focus-within .dropdown-menu{
+	display: block;
+}
+
+.menu-3.dropdown .dropdown-menu a{
+	display: block;
+	padding: 14px 18px;
+	font-family: Lato, lato, lato-black;
+	font-size: 20px;
+	color: #000;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.menu-3.dropdown .dropdown-menu a:hover{
+	/* reverse of the button: black bg + white text */
+	background: linear-gradient(180deg, #111111 0%, #000000 100%);
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.menu-3.dropdown .dropdown-menu .dropdown-tag{
+	opacity: 0.75;
+	font-size: 0.95em;
+}
    
   
 

@@ -76,6 +76,57 @@ body {
            color: white;
            cursor:pointer;
         }
+
+/* Dropdown for menu-3 (art) */
+.menu-3.dropdown{
+    position: relative;
+}
+
+.menu-3.dropdown .dropdown-toggle{
+    position: relative;
+    z-index: 10001;
+}
+
+.menu-3.dropdown .dropdown-menu{
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    z-index: 10000;
+
+    min-width: 92vw;
+    max-width: 92vw;
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.15);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+}
+
+.menu-3.dropdown:hover .dropdown-menu,
+.menu-3.dropdown:focus-within .dropdown-menu{
+    display: block;
+}
+
+.menu-3.dropdown .dropdown-menu a{
+    display: block;
+    padding: 14px 16px;
+    font-family: Lato, lato, lato-black;
+    font-size: 18px;
+    color: #000;
+    text-decoration: none;
+    white-space: normal;
+    line-height: 1.25;
+}
+
+.menu-3.dropdown .dropdown-menu a:hover{
+    background: linear-gradient(180deg, #111111 0%, #000000 100%);
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.menu-3.dropdown .dropdown-menu .dropdown-tag{
+    opacity: 0.75;
+    font-size: 0.95em;
+}
   
      /*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
      
@@ -526,4 +577,3 @@ body {
           font-size: 16px;
           color: rgba(0,0,0,1);
   }
-  
